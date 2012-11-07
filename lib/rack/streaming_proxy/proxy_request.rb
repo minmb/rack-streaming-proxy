@@ -97,7 +97,7 @@ class Rack::StreamingProxy
     end
 
     def copy_headers_to_proxy_request(request, proxy_request)
-      current_headers = request.env.reject {|env_key, env_val| !(env_key.match /^HTTP_/) }
+      current_headers = request.env.reject {|env_key, env_val| !(env_key.match /^(?:HTTP|REMOTE)_/) }
       current_headers.each { |name, value|
         fixed_name = reconstructed_header_name_for name
         # @logger.info "Setting proxy header #{name} to #{value} using #{fixed_name}"
